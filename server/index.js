@@ -9,7 +9,12 @@ const PORT = process.env.PORT || 3001;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/minihub';
 
 // Middleware
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5173'] }));
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
+];
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json({ limit: '10mb' })); // increased for base64 file uploads
 
 // Routes
