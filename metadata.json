@@ -1,0 +1,6 @@
+
+{
+  "name": "KTU Academic Hub",
+  "description": "A comprehensive portal for KTU students to track activity points, backlogs, and fee clearance, with an administrative interface for teacher verification and smart certificate categorization using Gemini AI.",
+  "requestFramePermissions": []
+}
