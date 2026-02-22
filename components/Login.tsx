@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { UserRole, User } from '../types.ts';
 import { SmoothInput } from './SmoothInput.tsx';
-import { loginUser } from '../services/dataService.ts';
+import { loginUser, registerUser } from '../services/dataService.ts';
 
 interface LoginProps {
   onLogin: (user: User) => void;
@@ -28,9 +28,18 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
     setError('');
     setIsLoading(true);
     try {
-      // Registration not yet wired to a backend endpoint;
-      // for now show a helpful message directing to the seeded accounts.
-      setError('Registration via UI coming soon. Use the seeded accounts to log in.');
+      const newUser = await registerUser({
+        name,
+        role,
+        ktuid: id.trim(),
+        department,
+        email,
+        password,
+      });
+      onLogin(newUser);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Registration failed';
+      setError(msg);
     } finally {
       setIsLoading(false);
     }
