@@ -99,7 +99,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
           <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${isChangingView ? 'opacity-0 scale-[0.97] blur-md' : 'opacity-100 scale-100 blur-0'}`}>
             <h2 className="text-3xl font-black text-center text-gray-900 dark:text-white mb-2 tracking-tighter">
-              KTU Hub
+              Academic Hub
             </h2>
             <p className="text-center text-slate-500 dark:text-slate-400 text-sm mb-10">
               {view === 'LOGIN' ? 'Secure Login for Academic Portal' : 'Register your student/faculty account'}

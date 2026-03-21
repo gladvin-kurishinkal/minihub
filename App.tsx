@@ -192,7 +192,7 @@ const App: React.FC = () => {
                 <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
               </svg>
             </div>
-            <h1 className="text-xl font-black tracking-tighter">KTU <span className="text-indigo-600">HUB</span></h1>
+            <h1 className="text-xl font-black tracking-tighter">Academic <span className="text-indigo-600">HUB</span></h1>
           </div>
           <div className="flex items-center space-x-4">
             <ThemeToggle isDark={isDark} toggle={() => setIsDark(!isDark)} />

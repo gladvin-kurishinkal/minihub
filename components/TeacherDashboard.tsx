@@ -169,6 +169,41 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
             </div>
 
             <div className="flex-1 overflow-y-auto p-8 space-y-10 custom-scrollbar">
+              {/* Student Overview: Activity Points + CGPA */}
+              {(() => {
+                const studentResults = allResults[managingStudent.id] || [];
+                const studentCgpa = studentResults.length > 0
+                  ? parseFloat((studentResults.reduce((acc, r) => acc + r.sgpa, 0) / studentResults.length).toFixed(2))
+                  : 0;
+                const studentActivityPoints = certificates
+                  .filter(c => c.status === 'APPROVED' && c.studentId === managingStudent.id)
+                  .reduce((acc, c) => acc + c.pointsClaimed, 0);
+                return (
+                  <section>
+                    <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center">
+                      <span className="w-1.5 h-1.5 bg-violet-500 rounded-full mr-2"></span>
+                      Student Overview
+                    </h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="p-5 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-1">Activity Points</p>
+                        <p className="text-3xl font-black text-indigo-600 dark:text-indigo-400">{studentActivityPoints} <span className="text-sm font-bold text-indigo-400">/ 100</span></p>
+                        <div className="mt-3 h-1.5 w-full bg-indigo-100 dark:bg-indigo-900 rounded-full overflow-hidden">
+                          <div className="h-full bg-indigo-500 rounded-full transition-all duration-700" style={{ width: `${Math.min(studentActivityPoints, 100)}%` }}></div>
+                        </div>
+                      </div>
+                      <div className="p-5 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-1">CGPA</p>
+                        <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400">{studentCgpa} <span className="text-sm font-bold text-emerald-400">/ 10</span></p>
+                        <div className="mt-3 h-1.5 w-full bg-emerald-100 dark:bg-emerald-900 rounded-full overflow-hidden">
+                          <div className="h-full bg-emerald-500 rounded-full transition-all duration-700" style={{ width: `${(studentCgpa / 10) * 100}%` }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                );
+              })()}
+
               {/* Academic Performance Overrides */}
               <section>
                 <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center">
